@@ -8,9 +8,13 @@
 
 <!-- Database Query -->
 <?php 
+session_start();
 include_once($_SERVER['DOCUMENT_ROOT'].'/AppLibra/functions/conn.php');
+$userID = $_SESSION['userID'];
 $query="select * from tblcategories";
+$pending_books_query="select * from tblbooks where accountID='$userID' AND bookStatus='0'";
 $result=mysqli_query($mysqli ,$query);
+$pending_books_result=mysqli_query($mysqli, $pending_books_query);
 ?>
 <!-- End Query -->
 <!-- Start of Content -->
@@ -97,8 +101,8 @@ $result=mysqli_query($mysqli ,$query);
                                                                                 { 
                                                                             ?>
                                                                         <option
-                                                                            values="<?php echo $rows['categoryID'] ?>">
-                                                                            <?php echo $rows['categoryName'] ?>
+                                                                            value="<?php echo $rows['categoryID']; ?>">
+                                                                            <?php echo $rows['categoryName']; ?>
                                                                         </option>
                                                                         <?php } ?>
                                                                     </select>
@@ -119,8 +123,8 @@ $result=mysqli_query($mysqli ,$query);
                                                             </div>
                                                             <div class="col-6 mb-3 align-self-center">
                                                                 <label for="username">Book Price</label>
-                                                                <input type="number" name="book-price" id="book_price" disabled
-                                                                    class="form-control" placeholder="0.00">
+                                                                <input type="number" name="book-price" id="book_price"
+                                                                    readonly class="form-control" placeholder="0.00">
                                                             </div>
                                                             <div class="col-12 mb-3">
                                                                 <div class="card">
@@ -592,28 +596,38 @@ $result=mysqli_query($mysqli ,$query);
                                 <div class="card-body p-0 vh-100 overflow-auto">
                                     <div class="contacts list">
                                         <div class="contact family-contact">
+
+                                            <?php while($rows=mysqli_fetch_assoc($pending_books_result)) { ?>
                                             <div class="contact-content">
                                                 <div class="contact-profile">
-                                                    <img src="dist/images/contact-1.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
+                                                    <img src="<?php $_SERVER['HTTP_HOST']; ?>/AppLibra/uploads/images/<?php echo $rows['bookCover']; ?>"
+                                                        alt="avatar" class="user-image img-fluid">
                                                     <div class="contact-info">
-                                                        <p class="contact-name mb-0">Kayla Fail</p>
+                                                        <p class="contact-name mb-0"><?php echo $rows['bookTitle']; ?>
+                                                        </p>
                                                         <p
                                                             class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Chief Executive Officer</p>
+                                                            <?php echo $rows['bookDesc']; ?></p>
                                                     </div>
                                                 </div>
                                                 <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">kf@mail.com</p>
+                                                    <p class="mb-0 small">Book Type: </p>
+                                                    <p class="user-email"><?php if($rows['bookType'] == '0'){
+                                                        echo "Free";
+                                                    }
+                                                        else
+                                                        {
+                                                            echo "Premium";
+                                                        }
+                                                    ?></p>
                                                 </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Washington</p>
+                                                <div class="contact-email">
+                                                    <p class="mb-0 small">Book Price: </p>
+                                                    <p class="user-email"><?php echo $rows['bookPrice']; ?></p>
                                                 </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
+                                                <div class="contact-email">
+                                                    <p class="mb-0 small">Date Uploaded: </p>
+                                                    <p class="user-email"><?php echo $rows['upload_timestamp']; ?></p>
                                                 </div>
                                                 <div class="line-h-1 h5">
                                                     <a class="text-success edit-contact" href="#" data-toggle="modal"
@@ -622,358 +636,7 @@ $result=mysqli_query($mysqli ,$query);
                                                             class="icon-trash"></i></a>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="contact friend-contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-2.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Margarita Metts</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Marketing Coordinator</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">mm@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Franklin</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact family-contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-3.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Shirley Vu</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Medical Assistant</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">sv@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Arlington</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact friend-contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-4.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Josef Mellott</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Web Developer</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">jm@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Centerville</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact office-contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-5.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Twanna Lenhart</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Web Designer</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">tl@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Lebanon</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact family-contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-6.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Eustolia Ashburn</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            President of Sales</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">ea@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Clinton</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact business-contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-7.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Rolanda Cusumano</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Project Manager</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">rc@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Springfield</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-8.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Morris Thibeau</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Account Executive</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">mt@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Georgetown</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-14.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Nisha Fraise</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Nursing Assistant</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">nf@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Fairview</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-10.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Brendon Schebler</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Librarian</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">bs@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Greenville</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-11.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">John Schebler</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Librarian</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">js@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">London</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="contact">
-                                            <div class="contact-content">
-                                                <div class="contact-profile">
-                                                    <img src="dist/images/contact-13.jpg" alt="avatar"
-                                                        class="user-image img-fluid">
-                                                    <div class="contact-info">
-                                                        <p class="contact-name mb-0">Emily Halk</p>
-                                                        <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
-                                                            Librarian</p>
-                                                    </div>
-                                                </div>
-                                                <div class="contact-email">
-                                                    <p class="mb-0 small">Email: </p>
-                                                    <p class="user-email">eh@mail.com</p>
-                                                </div>
-                                                <div class="contact-location">
-                                                    <p class="mb-0 small">Location: </p>
-                                                    <p class="user-location">Missouri</p>
-                                                </div>
-                                                <div class="contact-phone">
-                                                    <p class="mb-0 small">Phone: </p>
-                                                    <p class="user-phone">+1 (020) 123-4567</p>
-                                                </div>
-                                                <div class="line-h-1 h5">
-                                                    <a class="text-success edit-contact" href="#" data-toggle="modal"
-                                                        data-target="#edittask"><i class="icon-pencil"></i></a>
-                                                    <a class="text-danger delete-contact" href="#"><i
-                                                            class="icon-trash"></i></a>
-                                                </div>
-                                            </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -990,11 +653,12 @@ $result=mysqli_query($mysqli ,$query);
     const select = document.querySelector('#book_type')
     select.onchange = () => {
         if (select.value == '0') {
-            document.getElementById('book_price').setAttribute("disabled", '');
+            document.getElementById('book_price').setAttribute("readonly", '');
+            document.getElementById('book_price').setAttribute("value", '0.00');
         }
 
         if (select.value == '1') {
-            document.getElementById('book_price').removeAttribute("disabled");
+            document.getElementById('book_price').removeAttribute("readonly");
         }
     }
 </script>

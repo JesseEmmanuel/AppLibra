@@ -9,5 +9,4 @@
 
 </main>
 <!-- End of Content -->
-
 <?php include($_SERVER['DOCUMENT_ROOT'].'/AppLibra/app/pro/template/footer.php') ?>

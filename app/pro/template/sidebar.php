@@ -63,7 +63,7 @@ session_start();
 				</div>
 				<div class="row align-items-center">
 					<div class="col align-self-center">
-						<span class="h5 align-self-center mb-0 ml-auto text-success">Good Day! <?php echo $_SESSION['accountUserName']; ?></span>
+						<span class="h5 align-self-center mb-0 ml-auto text-success"><!--Good Day! <?php echo $_SESSION['accountUserName']; ?>--></span>
 					</div>
 				</div>
 				<div class="navbar-right ml-auto h-100">

@@ -20,7 +20,7 @@ if ($row['accountUserName'] == $username)
         else{
             header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/admin/home.php");
         }
-        $_SESSION['accountID'] = $row['accountID'];
+        $_SESSION['userID'] = $row['accountID'];
         $_SESSION['accountUserName'] = $row['accountUserName'];
         $_SESSION['profile_image'] = $row['accountProfileImage'];
     }
