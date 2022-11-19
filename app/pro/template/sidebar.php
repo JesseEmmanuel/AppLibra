@@ -9,7 +9,7 @@
 session_start();
 ?>
 
-<body id="main-container" class="default compact-menu">
+<body id="main-container" class="default semi-dark">
 
 	<!-- START: Header-->
 	<div id="header-fix" class="header fixed-top">
