@@ -687,6 +687,14 @@ body {
 	color: var(--bodycolor);
 }
 
+.success-color,
+.form-control,
+.form-control:focus {
+	color: var(--success);
+}
+
+
+
 hr {
 	border-top: 1px solid var(--bordercolor);
 }

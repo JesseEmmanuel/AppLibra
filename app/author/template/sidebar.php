@@ -9,7 +9,7 @@
 session_start();
 ?>
 
-<body id="main-container" class="default semi-dark">
+<body id="main-container" class="default">
 
 	<!-- START: Header-->
 	<div id="header-fix" class="header fixed-top">
@@ -221,7 +221,7 @@ session_start();
 					<ul>
 						<li class="<?= ($activePage == 'collections') ? 'active':'' ?>"><a href="collections.php"><i
 									class="fas fa-tasks"></i> Your Collections</a></li>
-						<li class="<?= ($activePage == 'upload') ? 'active':'' ?>"><a href="upload.php"><i
+						<li class="<?= ($activePage == 'uploadview') ? 'active':'' ?>"><a href="uploadview.php"><i
 									class="fas fa-cloud-upload-alt"></i> Upload Books</a></li>
 						<li class="<?= ($activePage == 'bookmarks') ? 'active':'' ?>"><a href="bookmarks.php"><i
 									class="fas fa-bookmark"></i> Bookmarks</a></li>

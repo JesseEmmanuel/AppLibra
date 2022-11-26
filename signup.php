@@ -87,8 +87,8 @@ $result=mysqli_query($mysqli ,$query);
                                                                     <?php  while($rows=mysqli_fetch_assoc($result))
                                                                         { 
                                                                     ?>
-                                                                    <option value="<?php echo $rows['categoryID'] ?>">
-                                                                        <?php echo $rows['categoryName'] ?></option>
+                                                                    <option>
+                                                                        <?php echo $rows['categoryName']; ?></option>
                                                                     <?php } ?>
                                                                 </select>
                                                                 <span id="profession_error" class="text-danger"></span>
@@ -96,11 +96,11 @@ $result=mysqli_query($mysqli ,$query);
                                                             <div class="col-6 mb-3">
                                                                 <div class="input-group">
                                                                     <div class="input-group-prepend">
-                                                                        <span class="input-group-text">I'm a</span>
+                                                                        <span class="input-group-text">I'm a/n</span>
                                                                     </div>
                                                                     <select name="role">
-                                                                        <option value="1">Professional</option>
-                                                                        <option value="2">Student</option>
+                                                                        <option>Author</option>
+                                                                        <option>Reader</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

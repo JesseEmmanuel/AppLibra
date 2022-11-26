@@ -3,7 +3,7 @@ session_start();
 
 //Initiate User ID//
 
-$book_author_ID = $_SESSION['userID'];
+$book_author_ID = $_SESSION['authorID'];
 
 //Initiate Book Category//
 $book_category = $_POST['book-category'];
@@ -40,31 +40,73 @@ $book_overview = $_POST['overview'];
 
 $book_status = 0;
 
+$book_publisher = $_POST['publish-name'];
+$book_ISBN = $_POST['book-isbn'];
+
+$book_authors = $_POST['book-author'];
+$book_categories = $_POST['book-category'];
+
 $mysqli = require __DIR__ . "/conn.php";
-$sql = "INSERT INTO tblbooks (accountID, categoryID, bookTitle, bookDesc, bookCover, bookPdf, bookType, bookPrice, bookOverview, bookStatus)
-        Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$book = "INSERT INTO tblbooks (publishID, bookTitle, bookDesc, bookCover, bookPdf, bookType, bookPrice, bookOverview, bookStatus)
+        Values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$category = "INSERT INTO tblbook_categories (bookID, categoryID)
+             Values(?,?)";
+
+$publisher = "INSERT INTO tblpublication (publishName, isbn)
+              Values(?,?)";
+
+$insert_categories = "INSERT INTO tblbook_categories (bookID, categoryID)
+                      VALUES (?, ?)";
+$insert_authors = "INSERT INTO tblbook_author (authorID, bookID)
+                   VALUES (?, ?)";
 
 $stmt = $mysqli->stmt_init();
 
-if(!$stmt->prepare($sql)){
-    die("SQL error: " .$mysqli->error);
-}
+$stmt->prepare($publisher);
+$stmt->bind_param("ss",
+                  $book_publisher,
+                  $book_ISBN);
+if($stmt->execute())
+{
+    $publish_query = "select * from tblpublication where isbn='$book_ISBN'";
+    $publish_query_result = mysqli_query($mysqli, $publish_query);
+    $publish_query_row = mysqli_fetch_assoc($publish_query_result);
+    $publish_ID = $publish_query_row['publishID'];
+    $stmt->prepare($book);
+    $stmt->bind_param("isssssdsi",
+                    $publish_ID,
+                    $book_title,
+                    $book_desc,
+                    $book_cover_imageName,
+                    $book_pdf_filename,
+                    $book_type,
+                    $book_price,
+                    $book_overview,
+                    $book_status);
+    $stmt->execute();
+    $book_query = "select * from tblbooks where bookTitle='$book_title'";
+    $book_query_result = mysqli_query($mysqli, $book_query);
+    $book_query_row = mysqli_fetch_assoc($book_query_result);
+    $bookID = $book_query_row['bookID'];
+    for ($x = 0; $x<count($book_categories); $x++){
+        //INSERT bookID and Category
+        $stmt->prepare($insert_categories);
+        $stmt->bind_param("ii",
+                          $bookID,
+                          $book_categories[$x]);
+        $stmt->execute();
+    }
+    for ($y=0;$y<count($book_authors);$y++){
+        //INSERT authorID and bookID
+        $stmt->prepare($insert_authors);
+        $stmt->bind_param("ii",
+                          $book_authors[$y],
+                          $bookID);
+        $stmt->execute();
+    }
+};
+header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/author/uploadview.php");
 
-$stmt->bind_param("iissssidsi",
-                  $book_author_ID,
-                  $book_category,
-                  $book_title,
-                  $book_desc,
-                  $book_cover_imageName,
-                  $book_pdf_filename,
-                  $book_type,
-                  $book_price,
-                  $book_overview,
-                  $book_status);
-
-if($stmt->execute()){
-    header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/pro/upload.php");
-}
 
 //print_r($_POST);
 
