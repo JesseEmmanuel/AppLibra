@@ -63,6 +63,9 @@ $profile = "INSERT INTO tblprofile (accountID, firstName, lastName, contactInfo,
 $author = "INSERT INTO tblauthor (profile_ID, field_of_interest)
            Values (?, ?)";
 
+$reader = "INSERT INTO tblreader (profile_ID, field_of_interest)
+          Values (?, ?)";
+
 $stmt = $mysqli->stmt_init();
 
 if(!$stmt->prepare($account)){
@@ -79,21 +82,21 @@ if($stmt->execute())
     $accID = "select * from tblaccounts where accountUserName='$username'";
     $result_acc_ID = mysqli_query($mysqli, $accID);
     $acc_row = mysqli_fetch_assoc($result_acc_ID);
+    $stmt->prepare($profile);
+    $stmt->bind_param("ississ",
+                        $acc_row['accountID'],
+                        $first_name,
+                        $last_name,
+                        $contactInfo,
+                        $email,
+                        $profile_image);
+    $stmt->execute();
+    $profileID = "select * from tblprofile where emailAddress='$email'";
+    $result_profile_ID = mysqli_query($mysqli, $profileID);
+    $profile_row = mysqli_fetch_assoc($result_profile_ID);
+    $profileID = $profile_row['profile_ID'];
     if($account_role == 'Author')
     {
-        $stmt->prepare($profile);
-        $stmt->bind_param("ississ",
-                         $acc_row['accountID'],
-                         $first_name,
-                         $last_name,
-                         $contactInfo,
-                         $email,
-                         $profile_image);
-        $stmt->execute();
-        $profileID = "select * from tblprofile where emailAddress='$email'";
-        $result_profile_ID = mysqli_query($mysqli, $profileID);
-        $profile_row = mysqli_fetch_assoc($result_profile_ID);
-        $profileID = $profile_row['profile_ID'];
         $stmt->prepare($author);
         $stmt->bind_param("is", $profile_row['profile_ID'], $field_of_interest);
         $stmt->execute();
@@ -106,28 +109,20 @@ if($stmt->execute())
         $_SESSION['profile_image'] = $profile_row['profileImage'];
         header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/author/library.php");
     }
-    else
+    elseif($account_role == 'Reader')
     {
-
-    }
-    /*$query = "select * from tblaccounts where accountUserName='$username'";
-    $result = mysqli_query($mysqli, $query);
-    $row = mysqli_fetch_assoc($result);
-    $_SESSION['logged_in'] = 1;
-    $_SESSION['userID'] = $row['accountID'];
-    $_SESSION['accountUserName'] = $username;
-    $_SESSION['email'] = $email;
-    $_SESSION['FullName'] = $fullname;
-    $_SESSION['accountRole'] = $_POST['role'];
-    $_SESSION['profile_image'] = $row['accountProfileImage'];
-    if($_POST['role'] == 1){
-        header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/author/library.php");
-        //echo $_SERVER['HTTP_HOST'].'/AppLibra/uploads/images/'.$_FILES['profileImage']['name'];
-    }
-    else
-    {
+        $stmt->prepare($reader);
+        $stmt->bind_param("is", $profile_row['profile_ID'], $field_of_interest);
+        $stmt->execute();
+        $readerQuery = "select * from tblreader where profile_ID='$profileID'";
+        $reader_result = mysqli_query($mysqli, $readerQuery);
+        $reader_row = mysqli_fetch_assoc($reader_result);
+        $_SESSION['logged_in'] = 1;
+        $_SESSION['accountID'] = $acc_row['accountID'];
+        $_SESSION['readerID'] = $author_row['readerID'];
+        $_SESSION['profile_image'] = $profile_row['profileImage'];
         header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/reader/library.php");
-    }*/
+    }
 }
 else
 {

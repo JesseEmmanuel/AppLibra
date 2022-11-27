@@ -107,14 +107,4 @@ if($stmt->execute())
 };
 header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/author/uploadview.php");
 
-
-//print_r($_POST);
-
-//var_dump($_FILES['book-cover']['tmp_name']);
-//var_dump($_FILES['book-cover']['tmp_name'])
-//echo $book_cover_image_path;
-//echo $book_file_pdf_path;
-//echo $book_overview;
-//var_dump($_POST);
-//echo $_SESSION['userID'];
 ?>
