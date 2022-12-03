@@ -36,12 +36,12 @@ if ($row['accountUserName'] == $username)
             $reader_result = mysqli_query($mysqli, $reader);
             $reader_row = mysqli_fetch_assoc($reader_result);
             $_SESSION['accountID'] = $accountID;
-            $_SESSION['readerID'] = $author_row['readerID'];
+            $_SESSION['readerID'] = $reader_row['readerID'];
             $_SESSION['profile_image'] = $profile_row['profileImage'];
             $_SESSION['UserFullName'] = $profile_row['firstName']." ".$profile_row['lastName'];
         }
-        else{
-            header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/admin/home.php");
+        elseif($row['accountRole'] == 'Admin'){
+            header("Location: http://".$_SERVER['HTTP_HOST']."/AppLibra/app/admin/dashboard.php");
         }
     }
     else

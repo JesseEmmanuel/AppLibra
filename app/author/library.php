@@ -10,7 +10,7 @@
 <main>
     <div class="row mx-1 pt-2">
         <div class="col-md-12">
-            <div class="card">
+            <!--<div class="card">
                 <div class="overflow-auto">
                     <div class="card-body d-md-flex text-center" style="width:150vw;">
                         <ul class="nav nav-pills d-md-flex m-0 pl-0 list-unstyled">
@@ -147,7 +147,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="Approved" role="tabpanel" aria-labelledby="Description">
                     <div class="row">
@@ -183,7 +183,7 @@
                                         placeholder="Search ...">
                                     <!--<a href="#" class="grid-style search-bar-menu"><i class="icon-grid"></i></a>-->
                                 </div>
-                                <div class="card-body p-0 vh-100 overflow-auto">
+                                <div class="card-body p-0">
                                     <div class="contacts grid">
                                         <div class="contact family-contact">
                                             <div class="contact-content">

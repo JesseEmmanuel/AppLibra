@@ -114,16 +114,6 @@ $author_query_result = mysqli_query($mysqli, $author_query);
                                                 <input type="number" name="book-price" id="book_price" readonly
                                                     class="form-control" placeholder="0.00">
                                             </div>
-                                            <div class="col-6 mb-3">
-                                                <label>Book Publish</label>
-                                                <input type="text" name="publish-name" class="form-control"
-                                                    placeholder="Name of Publisher">
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label>Book ISBN</label>
-                                                <input type="number" name="book-isbn" class="form-control"
-                                                    placeholder="ISDN Number:">
-                                            </div>
                                             <div class="col-12 mb-3">
                                                 <div class="card">
                                                     <div

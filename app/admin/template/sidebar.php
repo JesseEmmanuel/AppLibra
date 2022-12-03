@@ -63,7 +63,8 @@ session_start();
 				</div>
 				<div class="row align-items-center">
 					<div class="col align-self-center">
-						<span class="h5 align-self-center mb-0 ml-auto text-success"><!--Good Day! <?php echo $_SESSION['authorID']; ?>--></span>
+						<span class="h5 align-self-center mb-0 ml-auto text-success">
+							<!--Good Day! <?php echo $_SESSION['authorID']; ?>--></span>
 					</div>
 				</div>
 				<div class="navbar-right ml-auto h-100">
@@ -182,8 +183,8 @@ session_start();
 						<li class="dropdown user-profile align-self-center d-inline-block">
 							<a href="#" class="nav-link py-0" data-toggle="dropdown" aria-expanded="false">
 								<div class="media">
-									<img src="<?php $_SERVER['HTTP_HOST']; ?>/AppLibra/uploads/images/<?php echo $_SESSION['profile_image']; ?>"
-										alt="" class="d-flex img-fluid rounded-circle" width="29">
+									<img src="<?php $_SERVER['HTTP_HOST']; ?>/AppLibra/uploads/images/admin.png" alt=""
+										class="d-flex img-fluid rounded-circle" width="29">
 								</div>
 							</a>
 							<div class="dropdown-menu border dropdown-menu-right p-0">
@@ -206,25 +207,19 @@ session_start();
 		<div class="site-width">
 			<!-- START: Menu-->
 			<ul id="side-menu" class="sidebar-menu">
-				<li class="dropdown active"><a href="#"><i class="icon-home mr-1"></i> Home</a>
-					<ul>
-						<li class="<?= ($activePage == 'library') ? 'active':'' ?>"><a href="library.php"><i
-									class="fas fa-search"></i> Browse
-								for books</a></li>
-						<li class="<?= ($activePage == 'series') ? 'active':'' ?>"><a href="series.php"><i
-									class="fas fa-swatchbook"></i> Book Series</a></li>
-						<li class="<?= ($activePage == 'suggestion') ? 'active':'' ?>"><a href="suggestion.php"><i
-									class="fas fa-star"></i> Suggested for you</a></li>
-					</ul>
-				</li>
-				<li class="dropdown"><a href="#"><i class="fas fa-boxes mr-1"></i> Collections</a>
+				<li class="dropdown active"><a href="#"><i class="icon-home mr-1"></i> Management</a>
 					<ul>
 						<li class="<?= ($activePage == 'dashboard') ? 'active':'' ?>"><a href="dashboard.php"><i
-									class="icofont-dashboard-web"></i> Dashboard</a></li>
-						<li class="<?= ($activePage == 'uploadview') ? 'active':'' ?>"><a href="uploadview.php"><i
-									class="fas fa-cloud-upload-alt"></i> Upload Books</a></li>
-						<li class="<?= ($activePage == 'bookmarks') ? 'active':'' ?>"><a href="bookmarks.php"><i
-									class="fas fa-bookmark"></i> Bookmarks</a></li>
+									class="icofont-chart-pie"></i> Dashboard</a></li>
+						<li class="<?= ($activePage == 'users') ? 'active':'' ?>"><a href="users.php"><i
+									class="icofont-users-alt-2"></i> Users</a></li>
+						<li class="dropdown"><a href="#"><i class="icofont-cloud-upload"></i> Uploads</a>
+							<ul class="sub-menu">
+								<li class="<?= ($activePage == 'pending') ? 'active':'' ?>"><a href="pending.php"><i class="icon-energy"></i> Pending</a></li>
+								<li class="<?= ($activePage == 'approved') ? 'active':'' ?>"><a href="approved.php"><i class="icon-disc"></i> Approved</a></li>
+								<li class="<?= ($activePage == 'denied') ? 'active':'' ?>"><a href="denied.php"><i class="icon-disc"></i> Denied</a></li>
+							</ul>
+						</li>
 					</ul>
 				</li>
 			</ul>
