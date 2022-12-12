@@ -17,16 +17,18 @@ $book_desc = $_POST['book-desc'];
 //Initiate Book Cover Image FilePath//
 $image_path = $_SERVER['DOCUMENT_ROOT'].'/AppLibra/uploads/images/';
 $temp_image_path = $_FILES['book-cover']['tmp_name'];
-$book_cover_imageName = $_FILES['book-cover']['name'];
-$book_cover_image_path = $image_path.$_FILES['book-cover']['name'];
+$book_cover_image = $_FILES['book-cover']['name'];
+$book_cover_imageName = preg_replace("/\s+/", "_", $book_cover_image);
+$book_cover_image_path = $image_path.$book_cover_imageName;
 move_uploaded_file($temp_image_path, $book_cover_image_path);
 
 
 //Initiate Book File PDF FilePath//
 $document_path = $_SERVER['DOCUMENT_ROOT'].'/AppLibra/uploads/docs/';
 $temp_pdf_path = $_FILES['book-file']['tmp_name'];
-$book_pdf_filename = $_FILES['book-file']['name'];
-$book_file_pdf_path = $document_path.$_FILES['book-file']['name'];
+$book_pdf_file = $_FILES['book-file']['name'];
+$book_pdf_filename = preg_replace("/\s+/", "_", $book_pdf_file);
+$book_file_pdf_path = $document_path.$book_pdf_filename;
 move_uploaded_file($temp_pdf_path, $book_file_pdf_path);
 
 //Initiate Book Type//
@@ -39,9 +41,6 @@ $book_price = $_POST['book-price'];
 $book_overview = $_POST['overview'];
 
 $book_status = 0;
-
-$book_publisher = $_POST['publish-name'];
-$book_ISBN = $_POST['book-isbn'];
 
 $book_authors = $_POST['book-author'];
 $book_categories = $_POST['book-category'];
@@ -56,7 +55,7 @@ $insert_categories = "INSERT INTO tblbook_categories (bookID, categoryID)
                       VALUES (?, ?)";
 $insert_authors = "INSERT INTO tblbook_author (authorID, bookID)
                    VALUES (?, ?)";
-
+$stmt = $mysqli->stmt_init();
 
 $stmt->prepare($book);
 $stmt->bind_param("sssssdsi",

@@ -1,9 +1,9 @@
 <!-- START: Body-->
 
 <!-- START: Pre Loader-->
-<!--<div class="se-pre-con">
+<div class="se-pre-con">
 	<div class="loader"></div>
-</div>-->
+</div>
 <!-- END: Pre Loader-->
 <?php $activePage = basename($_SERVER['PHP_SELF'], ".php"); 
 session_start();
@@ -209,8 +209,7 @@ session_start();
 				<li class="dropdown active"><a href="#"><i class="icon-home mr-1"></i> Home</a>
 					<ul>
 						<li class="<?= ($activePage == 'library') ? 'active':'' ?>"><a href="library.php"><i
-									class="fas fa-search"></i> Browse
-								for books</a></li>
+									class="icofont-university"></i> Library</a></li>
 						<li class="<?= ($activePage == 'series') ? 'active':'' ?>"><a href="series.php"><i
 									class="fas fa-swatchbook"></i> Book Series</a></li>
 						<li class="<?= ($activePage == 'suggestion') ? 'active':'' ?>"><a href="suggestion.php"><i

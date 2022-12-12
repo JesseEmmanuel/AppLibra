@@ -8,11 +8,19 @@
         color: '#fff'
     });
 
+    /*$('document').ready(function() {
+        $('.contact-menu a').trigger('click');
+    });*/
+
+    $('document').ready(function() {
+        setTimeout($('.contact-menu li a.active').trigger('click'), 100)
+    });
+
     $('.contact-menu a').on('click', function () {
         $('.contact-menu a').removeClass('active');
         $(this).addClass('active');
         $('.contact').hide();
-        $('.' + $(this).data("contacttype")).show();
+        $('.' + $(this).data("contacttype")).show(150);
         return false;
     });
     $('.list-style').on('click', function () {

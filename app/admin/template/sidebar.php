@@ -133,42 +133,14 @@ session_start();
 									</span><span class="ring-point">
 									</span> </span>
 							</a>
-							<ul class="dropdown-menu dropdown-menu-right border   py-0">
+							<ul class="dropdown-menu dropdown-menu-right border py-0">
 								<li>
 									<a class="dropdown-item px-2 py-2 border border-top-0 border-left-0 border-right-0"
 										href="#">
 										<div class="media">
-											<img src="dist/images/author.jpg" alt=""
-												class="d-flex mr-3 img-fluid rounded-circle w-50">
 											<div class="media-body">
 												<p class="mb-0 text-success">john send a message</p>
 												12 min ago
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item px-2 py-2 border border-top-0 border-left-0 border-right-0"
-										href="#">
-										<div class="media">
-											<img src="dist/images/author2.jpg" alt=""
-												class="d-flex mr-3 img-fluid rounded-circle">
-											<div class="media-body">
-												<p class="mb-0 text-danger">Peter send a message</p>
-												15 min ago
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item px-2 py-2 border border-top-0 border-left-0 border-right-0"
-										href="#">
-										<div class="media">
-											<img src="dist/images/author3.jpg" alt=""
-												class="d-flex mr-3 img-fluid rounded-circle">
-											<div class="media-body">
-												<p class="mb-0 text-warning">Bill send a message</p>
-												5 min ago
 											</div>
 										</div>
 									</a>

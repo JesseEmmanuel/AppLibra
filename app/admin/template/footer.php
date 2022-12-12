@@ -30,7 +30,7 @@
 <script src="http://<?php echo $_SERVER['HTTP_HOST'].'/AppLibra/assets/dist/vendors/datatable/js/dataTables.bootstrap4.min.js'; ?>"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST'].'/AppLibra/assets/dist/vendors/summernote/summernote-bs4.js'; ?>"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST'].'/AppLibra/assets/dist/vendors/fancybox/jquery.fancybox.min.js'; ?>"></script>
-<script src="http://<?php echo $_SERVER['HTTP_HOST'].'/AppLibra/assets/dist/vendors/popper/popper.min.js'; ?>"></script>
+
 <script src="http://<?php echo $_SERVER['HTTP_HOST'].'/AppLibra/assets/dist/vendors/tooltip/tooltip-min.js'; ?>"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST'].'/AppLibra/assets/dist/vendors/datatable/js/dataTables.bootstrap4.min.js'; ?>"></script>
 <script src="http://<?php echo $_SERVER['HTTP_HOST'].'/AppLibra/assets/dist/vendors/chartjs/Chart.min.js'; ?>"></script>

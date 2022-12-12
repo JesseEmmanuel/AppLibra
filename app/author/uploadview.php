@@ -8,7 +8,6 @@
 
 <!-- Database Query -->
 <?php 
-session_start();
 include($_SERVER['DOCUMENT_ROOT'].'/AppLibra/functions/conn.php');
 $authID = $_SESSION['authorID'];
 $query="select * from tblcategories";
@@ -89,7 +88,7 @@ $approved_books_result=mysqli_query($mysqli, $approved_books_query);
                                         placeholder="Search ...">
                                     <a href="#" class="grid-style search-bar-menu"><i class="icon-grid"></i></a>
                                 </div>
-                                <div class="card-body p-0 vh-100 overflow-auto">
+                                <div class="card-body p-0 overflow-auto" style="height:70vh !important;">
                                     <div class="contacts grid">
                                         <?php while($rows=mysqli_fetch_assoc($approved_books_result)) { ?>
                                         <div class="contact <?php echo $rows['book_type'] ?>">
@@ -100,7 +99,7 @@ $approved_books_result=mysqli_query($mysqli, $approved_books_query);
                                                     <div class="contact-info">
                                                         <p class="contact-name mb-0"><?php echo $rows['title'] ?></p>
                                                         <p
-                                                            class="contact-position mb-0 small font-weight-bold text-muted">
+                                                            class="contact-position mb-0 small text-muted">
                                                             <?php echo $rows['book_description'] ?></p>
                                                     </div>
                                                 </div>
@@ -119,7 +118,7 @@ $approved_books_result=mysqli_query($mysqli, $approved_books_query);
                                                         ?>
                                                         <?php while($authors_rows=mysqli_fetch_assoc($authors_result)) { ?>
                                                         <span
-                                                            class="badge badge-pill badge-secondary mb-1"><small><?php echo$authors_rows['fname']." ".$authors_rows['lname']; ?></small></span><br />
+                                                            class="badge badge-pill badge-secondary mb-1"><small><?php echo $authors_rows['fname']." ".$authors_rows['lname']; ?></small></span><br />
                                                         <?php } ?>
                                                     </p>
                                                 </div>
@@ -129,9 +128,8 @@ $approved_books_result=mysqli_query($mysqli, $approved_books_query);
                                                         <?php
                                                             $bookID = $rows['book_ID'];
                                                             $categories = "SELECT tblbook_categories.book_categoryID, tblbooks.bookID,
-                                                            tblcategories.categoryID,
-                                                            tblcategories.categoryName AS categoryName
-                                                            FROM (tblbook_categories INNER JOIN tblbooks ON tblbook_categories.bookID =
+                                                            tblcategories.categoryID, tblcategories.categoryName AS categoryName, 
+                                                            tblcategories.categoryThemeColor FROM (tblbook_categories INNER JOIN tblbooks ON tblbook_categories.bookID =
                                                             tblbooks.bookID)
                                                             INNER JOIN tblcategories ON tblbook_categories.categoryID =
                                                             tblcategories.categoryID
@@ -139,8 +137,8 @@ $approved_books_result=mysqli_query($mysqli, $approved_books_query);
                                                             $categories_result = mysqli_query($mysqli, $categories);
                                                         ?>
                                                         <?php while($categories_rows=mysqli_fetch_assoc($categories_result)) { ?>
-                                                        <span
-                                                            class="badge badge badge-success mb-1"><small><?php echo $categories_rows['categoryName']; ?></small>
+                                                        <span class="badge badge badge-success mb-1"
+                                                            style="background:<?php echo $categories_rows['categoryThemeColor'] ?>!important;"><small><?php echo $categories_rows['categoryName']; ?></small>
                                                         </span>
                                                         <?php } ?>
                                                     </p>
@@ -152,9 +150,27 @@ $approved_books_result=mysqli_query($mysqli, $approved_books_query);
                                                     </p>
                                                 </div>
                                                 <div class="line-h-1 h5">
-                                                    <a class="text-success" href="#" ><i class="icon-cloud-download"></i></a>
-                                                    <a class="text-info" href="#"><i class="icon-eye"></i></a>
-                                                    <a class="text-danger" href="#"><i class="icon-heart"></i></a>
+                                                    <a href="">
+                                                        <button type="button" class="btn btn-sm btn-secondary"
+                                                            data-toggle="tooltip" data-placement="bottom"
+                                                            title="Re-upload pdf">
+                                                            <i class="icofont-upload"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="editApprovedBook.php?bookID=<?php echo $rows['book_ID'] ?>">
+                                                        <button type="button" class="btn btn-sm btn-info"
+                                                            data-toggle="tooltip" data-placement="bottom"
+                                                            title="Edit Book Summary">
+                                                            <i class="icofont-ui-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="">
+                                                        <button type="button" class="btn btn-sm btn-danger"
+                                                            data-toggle="tooltip" data-placement="bottom"
+                                                            title="Delete this book">
+                                                            <i class="icofont-trash"></i>
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,7 +193,7 @@ $approved_books_result=mysqli_query($mysqli, $approved_books_query);
                                     <a href="#" class="list-style search-bar-menu border-0 active"><i
                                             class="icon-list"></i></a>
                                 </div>
-                                <div class="card-body p-0 vh-100 overflow-auto">
+                                <div class="card-body p-0 vh-100 overflow-auto" style="height:50vh !important;">
                                     <div class="contacts list">
                                         <div class="contact family-contact">
 

@@ -7,10 +7,10 @@
 <!--End of Sidebar -->
 <?php
 include($_SERVER['DOCUMENT_ROOT'].'/AppLibra/functions/conn.php');
-$books = "SELECT tblbooks.bookID AS bookID, tblbooks.bookCover AS bookCover, tblbooks.bookTitle AS bookTitle, tblbooks.publishID AS publishID, 
-          tblpublication.publishName AS publishName, tblpublication.isbn AS isbn, tblbooks.bookPdf AS bookPdf, tblbooks.bookType AS bookType, 
-          tblbooks.bookPrice AS bookPrice, tblbooks.bookStatus AS bookStatus, tblbooks.upload_timestamp AS upload_timestamp
-          FROM tblbooks INNER JOIN tblpublication ON tblbooks.publishID = tblpublication.publishID WHERE (((tblbooks.bookStatus)=2))";
+$books = "SELECT tblbooks.bookID AS bookID, tblbooks.bookTitle AS bookTitle, tblbooks.bookDesc, tblbooks.bookCover AS bookCover,
+                 tblbooks.bookPdf AS bookPdf, tblbooks.bookOverview, tblbooks.bookStatus AS bookStatus, tblbooks.bookType AS bookType, 
+                 tblbooks.bookPrice AS bookPrice, tblbooks.upload_timestamp AS upload_timestamp
+                 FROM tblbooks WHERE (((tblbooks.bookStatus)=2))";
 $books_result = mysqli_query($mysqli, $books);
 ?>
 <main>

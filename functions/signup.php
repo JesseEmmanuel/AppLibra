@@ -45,6 +45,12 @@ $profile = $_SERVER['DOCUMENT_ROOT'].'/AppLibra/uploads/images/';
 $temp_file = $_FILES['profileImage']['tmp_name'];
 $newfilepath = $profile.$_FILES['profileImage']['name'];
 $profile_image = $_FILES['profileImage']['name'];
+if(empty($profile_image)){
+    $profile_image = 'profile.png';
+}
+else{
+    return $profile_image;
+}
 move_uploaded_file($temp_file, $newfilepath);
 $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
