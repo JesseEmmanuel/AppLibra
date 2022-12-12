@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 10:53 AM
+-- Generation Time: Dec 12, 2022 at 11:14 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -42,7 +42,7 @@ CREATE TABLE `tblaccounts` (
 INSERT INTO `tblaccounts` (`accountID`, `accountUserName`, `accountPassWord`, `accountRole`, `dateCreated`) VALUES
 (1, 'soft_dev001', '$2y$10$guZN7CmheLkHVriY.VzyrOtXbfSZDINIwQUePbPejaEeGo5y3R5nu', 'Author', '2022-11-23 03:01:54'),
 (14, 'admin', '$2y$10$yFpwQAKfLG3lr9knlR6ROOp58k.MET5LXFc63wdsoVibcFtUBdjku', 'Admin', '2022-12-12 09:50:20'),
-(16, 'oddjobs', '$2y$10$srqBmrdozNZSUe8j2wxIJOCewHcL9mNdxd6l7QYvCLqV0WPA7/sKW', 'Author', '2022-12-12 09:53:21');
+(17, 'oddjobs', '$2y$10$jq.SKkXktnhjYs4V0alhWu5i7tXXqEqg4nvLrV0Kp/hmUHZEKz7Si', 'Author', '2022-12-12 09:57:38');
 
 -- --------------------------------------------------------
 
@@ -61,8 +61,7 @@ CREATE TABLE `tblauthor` (
 --
 
 INSERT INTO `tblauthor` (`authorID`, `profile_ID`, `field_of_interest`) VALUES
-(1, 1, 'Technology'),
-(7, 15, 'Literature and Arts');
+(1, 1, 'Technology');
 
 -- --------------------------------------------------------
 
@@ -170,7 +169,7 @@ CREATE TABLE `tblprofile` (
   `accountID` int(10) NOT NULL,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
-  `contactInfo` int(50) NOT NULL,
+  `contactInfo` varchar(50) NOT NULL,
   `emailAddress` varchar(255) NOT NULL,
   `profileImage` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -181,8 +180,7 @@ CREATE TABLE `tblprofile` (
 --
 
 INSERT INTO `tblprofile` (`profile_ID`, `accountID`, `firstName`, `lastName`, `contactInfo`, `emailAddress`, `profileImage`, `created_at`) VALUES
-(1, 1, 'Jesse Emmanuel', 'Basco', 2147483647, 'jesseodds@gmail.com', '359-3598942_gintoki-sakata-chibi-hd-png-download.png', '2022-11-23 03:01:54'),
-(15, 16, 'Emmanuel', 'Mogato', 2147483647, 'jesseemmanuel@gmail.com', 'profile.png', '2022-12-12 09:53:21');
+(1, 1, 'Jesse Emmanuel', 'Basco', '2147483647', 'jesseodds@gmail.com', '359-3598942_gintoki-sakata-chibi-hd-png-download.png', '2022-11-23 03:01:54');
 
 -- --------------------------------------------------------
 
@@ -263,13 +261,13 @@ ALTER TABLE `tblreader`
 -- AUTO_INCREMENT for table `tblaccounts`
 --
 ALTER TABLE `tblaccounts`
-  MODIFY `accountID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `accountID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tblauthor`
 --
 ALTER TABLE `tblauthor`
-  MODIFY `authorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `authorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tblbooks`
@@ -299,7 +297,7 @@ ALTER TABLE `tblcategories`
 -- AUTO_INCREMENT for table `tblprofile`
 --
 ALTER TABLE `tblprofile`
-  MODIFY `profile_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `profile_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tblreader`

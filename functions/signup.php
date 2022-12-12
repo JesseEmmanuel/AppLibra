@@ -89,7 +89,7 @@ if($stmt->execute())
     $result_acc_ID = mysqli_query($mysqli, $accID);
     $acc_row = mysqli_fetch_assoc($result_acc_ID);
     $stmt->prepare($profile);
-    $stmt->bind_param("ississ",
+    $stmt->bind_param("isssss",
                         $acc_row['accountID'],
                         $first_name,
                         $last_name,
