@@ -11,7 +11,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/AppLibra/functions/conn.php');
 $authID = $_SESSION['authorID'];
 $query="select * from tblcategories";
 $author_query = "SELECT tblauthor.authorID AS authID, tblprofile.profile_ID AS profID, tblprofile.firstName AS fname, tblprofile.lastName AS lname
-                 FROM tblprofile INNER JOIN tblauthor ON tblprofile.profile_ID = tblauthor.profile_ID WHERE (((NOT tblauthor.authorID) = '$authID')) ";
+                 FROM tblprofile INNER JOIN tblauthor ON tblprofile.profile_ID = tblauthor.profile_ID";
 $result=mysqli_query($mysqli ,$query);
 $author_query_result = mysqli_query($mysqli, $author_query);
 ?>
@@ -84,13 +84,21 @@ $author_query_result = mysqli_query($mysqli, $author_query);
                                                         <span class="input-group-text">Book Author/s</span>
                                                     </div>
                                                     <select multiple name="book-author[]">
-                                                        <option label="Choose on thing">Choose authors</option>
-                                                        <option selected="selected" value="<?php echo $_SESSION['authorID']; ?>"><?php echo $_SESSION['UserFullName'] ?> (YOU)</option>
                                                         <?php 
-                                                                                while($rows=mysqli_fetch_assoc($author_query_result))
-                                                                                { 
-                                                                            ?>
-                                                        <option value="<?php echo $rows['authID']; ?>">
+                                                            while($rows=mysqli_fetch_assoc($author_query_result))
+                                                            { 
+                                                        ?>
+                                                        <option value="<?php echo $rows['authID']; ?>"
+                                                        <?php 
+                                                        if($rows['authID'] == $authID)
+                                                        {
+                                                            echo 'selected';
+                                                        }
+                                                        else
+                                                        {
+                                                            echo '';
+                                                        } 
+                                                        ?>>
                                                             <?php echo $rows['fname']." ".$rows['lname']; ?>
                                                         </option>
                                                         <?php } ?>

@@ -185,12 +185,7 @@ session_start();
 									class="icofont-chart-pie"></i> Dashboard</a></li>
 						<li class="<?= ($activePage == 'users') ? 'active':'' ?>"><a href="users.php"><i
 									class="icofont-users-alt-2"></i> Users</a></li>
-						<li class="dropdown"><a href="#"><i class="icofont-cloud-upload"></i> Uploads</a>
-							<ul class="sub-menu">
-								<li class="<?= ($activePage == 'pending') ? 'active':'' ?>"><a href="pending.php"><i class="icon-energy"></i> Pending</a></li>
-								<li class="<?= ($activePage == 'approved') ? 'active':'' ?>"><a href="approved.php"><i class="icon-disc"></i> Approved</a></li>
-								<li class="<?= ($activePage == 'denied') ? 'active':'' ?>"><a href="denied.php"><i class="icon-disc"></i> Denied</a></li>
-							</ul>
+						<li class="<?= ($activePage == 'uploads') ? 'active':'' ?>"><a href="uploads.php"><i class="icofont-cloud-upload"></i> Uploads</a>
 						</li>
 					</ul>
 				</li>

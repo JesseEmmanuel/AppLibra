@@ -53,7 +53,7 @@ $categories_result = mysqli_query($mysqli, $categories);
                                 <div class="card-header border-bottom p-1 d-flex">
                                     <a href="#" class="d-inline-block d-lg-none flip-menu-toggle"><i
                                             class="icon-menu"></i></a>
-                                    <i class="icofont-search-stock fa-3x text-success"></i>
+                                    <i class="icofont-search-document fa-2x text-secondary"></i>
                                     <input type="text" class="form-control border-0 p-2 w-100 h-100 contact-search"
                                         placeholder="Search by Author, Free/Premium, Title ...">
                                     <!--<a href="#" class="grid-style search-bar-menu"><i class="icon-grid"></i></a>-->
